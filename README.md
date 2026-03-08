@@ -76,6 +76,39 @@ Take a look and play with sample data at [http://sandbox.open-metadata.org](http
 ## Install and Run OpenMetadata
 Get up and running in a few minutes. See the OpenMetadata documentation for [installation instructions](https://docs.open-metadata.org/quick-start/local-docker-deployment).
 
+### Enterprise Minimal Quick Start (this branch)
+
+This branch ships a minimal enterprise stack with:
+- OpenMetadata Server + UI
+- Postgres metastore
+- Elasticsearch or OpenSearch
+- Optional ingestion runtime
+
+Run from the repository root:
+
+```bash
+./start.sh
+```
+
+Useful commands:
+
+```bash
+./start.sh --clean up --search elasticsearch   # clean restart with Elasticsearch
+./start.sh --search opensearch                 # switch to OpenSearch
+./start.sh --with-ingestion                    # enable ingestion runtime
+./start.sh ps                                  # service status
+./start.sh logs                                # follow logs
+./start.sh down                                # stop stack
+```
+
+Default URLs:
+- UI: `http://localhost:8585`
+- Healthcheck: `http://localhost:8586/healthcheck`
+
+Default login:
+- Email: `admin@open-metadata.org`
+- Password: `admin`
+
 ## Documentation and Support
 
 We're here to help and make OpenMetadata even better! Check out [OpenMetadata documentation](https://docs.open-metadata.org/) for a complete description of OpenMetadata's features. Join our [Slack Community](https://slack.open-metadata.org/) to get in touch with us if you want to chat, need help, or discuss new feature requirements.

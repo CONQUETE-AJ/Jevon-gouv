@@ -1,0 +1,49 @@
+source:
+  type: postgres
+  serviceName: local_postgres_multi
+  serviceConnection:
+    config:
+      type: Postgres
+      hostPort: host.docker.internal:5432
+      username: postgres
+      database: postgres
+      ingestAllDatabases: true
+      sslMode: disable
+  sourceConfig:
+    config:
+      type: AutoClassification
+      storeSampleData: true
+      sampleDataCount: 25
+      enableAutoClassification: true
+      databaseFilterPattern:
+        includes:
+          - "^anjanews$"
+          - "^financebot$"
+          - "^insight$"
+          - "^moteur-ia$"
+          - "^moteur2_db_registry$"
+          - "^moteur2_demo$"
+          - "^moteur2_temp$"
+          - "^pasteque$"
+          - "^perf_pilot$"
+          - "^test$"
+          - "^test_sandbox$"
+          - "^test_sphereagent$"
+      schemaFilterPattern:
+        excludes:
+          - "^information_schema$"
+      tableFilterPattern:
+        excludes:
+          - "^pg_.*"
+processor:
+  type: orm-profiler
+  config: {}
+sink:
+  type: metadata-rest
+  config: {}
+workflowConfig:
+  openMetadataServerConfig:
+    hostPort: http://enterprise_openmetadata_server:8585/api
+    authProvider: openmetadata
+    securityConfig:
+      jwtToken: "<SET_ADMIN_JWT_TOKEN>"
